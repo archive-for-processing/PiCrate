@@ -6932,11 +6932,11 @@ public class PGraphicsOpenGL extends PGraphics {
           PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/LightVert-brcm.glsl");
         defTexlightShaderVertURL =
           PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/TexLightVert-brcm.glsl");
-    } else if (OPENGL_RENDERER.contains("VC4")) {     // Mesa driver for same hardware
+    } else if (OPENGL_RENDERER.contains("V3D")) {     // Mesa driver for same hardware
         defLightShaderVertURL =
-          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/LightVert-vc4.glsl");
+          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/LightVert-V3D.glsl");
         defTexlightShaderVertURL =
-          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/TexLightVert-vc4.glsl");
+          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/TexLightVert-V3D.glsl");
     }
 
     glParamsRead = true;
