@@ -160,13 +160,7 @@ public class PApplet implements PConstants {
   static {
     String osname = System.getProperty("os.name");
 
-    if (osname.contains("Mac")) {
-      platform = MACOSX;
-
-    } else if (osname.contains("Windows")) {
-      platform = WINDOWS;
-
-    } else if (osname.equals("Linux")) {  // true for the ibm vm
+    if (osname.equals("Linux")) {  // true for the ibm vm
       platform = LINUX;
 
     } else {
@@ -987,49 +981,6 @@ public class PApplet implements PConstants {
     // Here's where size(), fullScreen(), smooth(N) and noSmooth() might
     // be called, conjuring up the demons of various rendering configurations.
     settings();
-
-    if (display == SPAN && platform == MACOSX) {
-      // Make sure "Displays have separate Spaces" is unchecked
-      // in System Preferences > Mission Control
-      Process p = exec("defaults", "read", "com.apple.spaces", "spans-displays");
-      BufferedReader outReader = createReader(p.getInputStream());
-      BufferedReader errReader = createReader(p.getErrorStream());
-      StringBuilder stdout = new StringBuilder();
-      StringBuilder stderr = new StringBuilder();
-      String line = null;
-      try {
-        while ((line = outReader.readLine()) != null) {
-          stdout.append(line);
-        }
-        while ((line = errReader.readLine()) != null) {
-          stderr.append(line);
-        }
-      } catch (IOException e) {
-        printStackTrace(e);
-      }
-
-      int resultCode = -1;
-      try {
-        resultCode = p.waitFor();
-      } catch (InterruptedException e) {
-      }
-
-      String result = trim(stdout.toString());
-      if ("0".equals(result)) {
-        EventQueue.invokeLater(() -> {
-          checkLookAndFeel();
-          final String msg
-            = "To use fullScreen(SPAN), first turn off “Displays have separate spaces”\n"
-            + "in System Preferences \u2192 Mission Control. Then log out and log back in.";
-          JOptionPane.showMessageDialog(null, msg, "Apple's Defaults Stink",
-            JOptionPane.WARNING_MESSAGE);
-        });
-      } else if (!"1".equals(result)) {
-        System.err.println("Could not check the status of “Displays have separate spaces.”");
-        System.err.format("Received message '%s' and result code %d.%n", trim(stderr.toString()), resultCode);
-      }
-    }
-
     insideSettings = false;
   }
 
@@ -2591,24 +2542,7 @@ public class PApplet implements PConstants {
       mouseY = event.getY();
     }
 
-    int button = event.getButton();
-
-    // If running on Mac OS, allow ctrl-click as right mouse.
-    if (PApplet.platform == PConstants.MACOSX && event.getButton() == PConstants.LEFT) {
-      if (action == MouseEvent.PRESS && event.isControlDown()) {
-        macosxLeftButtonWithCtrlPressed = true;
-      }
-      if (macosxLeftButtonWithCtrlPressed) {
-        button = PConstants.RIGHT;
-        event = new MouseEvent(event.getNative(), event.getMillis(),
-          event.getAction(), event.getModifiers(),
-          event.getX(), event.getY(),
-          button, event.getCount());
-      }
-      if (action == MouseEvent.RELEASE) {
-        macosxLeftButtonWithCtrlPressed = false;
-      }
-    }
+    int button = event.getButton();  
 
     // Get the (already processed) button code
     mouseButton = button;
