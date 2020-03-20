@@ -3,6 +3,7 @@ package processing.data;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import processing.core.PApplet;
 
@@ -19,23 +20,14 @@ public class IntDict {
   /** Number of elements in the table */
   protected int count;
 
-    /**
-     *
-     */
-    protected String[] keys;
-
-    /**
-     *
-     */
-    protected int[] values;
+  protected String[] keys;
+  protected int[] values;
 
   /** Internal implementation for faster lookups */
   private HashMap<String, Integer> indices = new HashMap<>();
 
-    /**
-     *
-     */
-    public IntDict() {
+
+  public IntDict() {
     count = 0;
     keys = new String[10];
     values = new int[10];
@@ -43,10 +35,9 @@ public class IntDict {
 
 
   /**
-   * Create a new lookup with a specific size.This is more efficient than not
- specifying a size. Use it when you know the rough size of the thing you're creating.
+   * Create a new lookup with a specific size. This is more efficient than not
+   * specifying a size. Use it when you know the rough size of the thing you're creating.
    *
-     * @param length
    * @nowebref
    */
   public IntDict(int length) {
@@ -60,7 +51,6 @@ public class IntDict {
    * Read a set of entries from a Reader that has each key/value pair on
    * a single line, separated by a tab.
    *
-     * @param reader
    * @nowebref
    */
   public IntDict(BufferedReader reader) {
@@ -80,8 +70,6 @@ public class IntDict {
   }
 
   /**
-     * @param keys
-     * @param values
    * @nowebref
    */
   public IntDict(String[] keys, int[] values) {
@@ -105,7 +93,6 @@ public class IntDict {
    *   { "key2", 2 }
    * });
    * </pre>
-     * @param pairs
    */
   public IntDict(Object[][] pairs) {
     count = pairs.length;
@@ -122,7 +109,6 @@ public class IntDict {
   /**
    * Returns the number of key/value pairs
    *
-     * @return 
    * @webref intdict:method
    * @brief Returns the number of key/value pairs
    */
@@ -132,8 +118,8 @@ public class IntDict {
 
 
   /**
-   * Resize the internal data, this can only be used to shrink the list.Helpful for situations like sorting and then grabbing the top 50 entries.
-     * @param arg0
+   * Resize the internal data, this can only be used to shrink the list.
+   * Helpful for situations like sorting and then grabbing the top 50 entries.
    */
   public void resize(int length) {
     if (length > count) {
@@ -176,22 +162,10 @@ public class IntDict {
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-    /**
-     *
-     */
-
 
   public class Entry {
-
-      /**
-       *
-       */
-      public String key;
-
-      /**
-       *
-       */
-      public int value;
+    public String key;
+    public int value;
 
     Entry(String key, int value) {
       this.key = key;
@@ -199,11 +173,8 @@ public class IntDict {
     }
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterable<Entry> entries() {
+
+  public Iterable<Entry> entries() {
     return new Iterable<Entry>() {
 
       public Iterator<Entry> iterator() {
@@ -212,11 +183,8 @@ public class IntDict {
     };
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterator<Entry> entryIterator() {
+
+  public Iterator<Entry> entryIterator() {
     return new Iterator<Entry>() {
       int index = -1;
 
@@ -240,32 +208,21 @@ public class IntDict {
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-    /**
-     *
-     * @param index
-     * @return
-     */
-
 
   public String key(int index) {
     return keys[index];
   }
 
-    /**
-     *
-     */
-    protected void crop() {
+
+  protected void crop() {
     if (count != keys.length) {
       keys = PApplet.subset(keys, 0, count);
       values = PApplet.subset(values, 0, count);
     }
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterable<String> keys() {
+
+  public Iterable<String> keys() {
     return new Iterable<String>() {
 
       @Override
@@ -277,11 +234,6 @@ public class IntDict {
 
 
   // Use this to iterate when you want to be able to remove elements along the way
-
-    /**
-     *
-     * @return
-     */
   public Iterator<String> keyIterator() {
     return new Iterator<String>() {
       int index = -1;
@@ -303,9 +255,8 @@ public class IntDict {
 
 
   /**
-   * Return a copy of the internal keys array.This array can be modified.
+   * Return a copy of the internal keys array. This array can be modified.
    *
-     * @return 
    * @webref intdict:method
    * @brief Return a copy of the internal keys array
    */
@@ -314,12 +265,8 @@ public class IntDict {
     return keyArray(null);
   }
 
-    /**
-     *
-     * @param outgoing
-     * @return
-     */
-    public String[] keyArray(String[] outgoing) {
+
+  public String[] keyArray(String[] outgoing) {
     if (outgoing == null || outgoing.length != count) {
       outgoing = new String[count];
     }
@@ -327,18 +274,13 @@ public class IntDict {
     return outgoing;
   }
 
-    /**
-     *
-     * @param index
-     * @return
-     */
-    public int value(int index) {
+
+  public int value(int index) {
     return values[index];
   }
 
 
   /**
-     * @return 
    * @webref intdict:method
    * @brief Return the internal array being used to store the values
    */
@@ -352,11 +294,8 @@ public class IntDict {
     };
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterator<Integer> valueIterator() {
+
+  public Iterator<Integer> valueIterator() {
     return new Iterator<Integer>() {
       int index = -1;
 
@@ -379,7 +318,6 @@ public class IntDict {
   /**
    * Create a new array and copy each of the values into it.
    *
-     * @return 
    * @webref intdict:method
    * @brief Create a new array and copy each of the values into it
    */
@@ -391,11 +329,10 @@ public class IntDict {
 
   /**
    * Fill an already-allocated array with the values (more efficient than
-   * creating a new array each time).If 'array' is null, or not the same
- size as the number of values, a new array will be allocated and returned.
+   * creating a new array each time). If 'array' is null, or not the same
+   * size as the number of values, a new array will be allocated and returned.
    *
    * @param array values to copy into the array
-     * @return 
    */
   public int[] valueArray(int[] array) {
     if (array == null || array.length != size()) {
@@ -409,8 +346,6 @@ public class IntDict {
   /**
    * Return a value for the specified key.
    *
-     * @param key
-     * @return 
    * @webref intdict:method
    * @brief Return a value for the specified key
    */
@@ -422,13 +357,8 @@ public class IntDict {
     return values[index];
   }
 
-    /**
-     *
-     * @param key
-     * @param alternate
-     * @return
-     */
-    public int get(String key, int alternate) {
+
+  public int get(String key, int alternate) {
     int index = index(key);
     if (index == -1) return alternate;
     return values[index];
@@ -438,8 +368,6 @@ public class IntDict {
   /**
    * Create a new key/value pair or change the value of one.
    *
-     * @param key
-     * @param amount
    * @webref intdict:method
    * @brief Create a new key/value pair or change the value of one
    */
@@ -452,13 +380,8 @@ public class IntDict {
     }
   }
 
-    /**
-     *
-     * @param index
-     * @param key
-     * @param value
-     */
-    public void setIndex(int index, String key, int value) {
+
+  public void setIndex(int index, String key, int value) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException(index);
     }
@@ -468,8 +391,6 @@ public class IntDict {
 
 
   /**
-     * @param key
-     * @return 
    * @webref intdict:method
    * @brief Check if a key is a part of the data structure
    */
@@ -481,7 +402,6 @@ public class IntDict {
   /**
    * Increase the value associated with a specific key by 1.
    *
-     * @param key
    * @webref intdict:method
    * @brief Increase the value of a specific key value by 1
    */
@@ -491,10 +411,9 @@ public class IntDict {
 
 
   /**
-   * Merge another dictionary into this one.Calling this increment()
- since it doesn't make sense in practice for the other dictionary types,
- even though it's technically an add().
-     * @param arg0
+   * Merge another dictionary into this one. Calling this increment()
+   * since it doesn't make sense in practice for the other dictionary types,
+   * even though it's technically an add().
    */
   public void increment(IntDict dict) {
     for (int i = 0; i < dict.count; i++) {
@@ -504,8 +423,6 @@ public class IntDict {
 
 
   /**
-     * @param key
-     * @param amount
    * @webref intdict:method
    * @brief Add to a value
    */
@@ -520,8 +437,6 @@ public class IntDict {
 
 
   /**
-     * @param key
-     * @param amount
    * @webref intdict:method
    * @brief Subtract from a value
    */
@@ -531,8 +446,6 @@ public class IntDict {
 
 
   /**
-     * @param key
-     * @param amount
    * @webref intdict:method
    * @brief Multiply a value
    */
@@ -545,8 +458,6 @@ public class IntDict {
 
 
   /**
-     * @param key
-     * @param amount
    * @webref intdict:method
    * @brief Divide a value
    */
@@ -569,11 +480,6 @@ public class IntDict {
 
 
   // return the index of the minimum value
-
-    /**
-     *
-     * @return
-     */
   public int minIndex() {
     //checkMinMax("minIndex");
     if (count == 0) return -1;
@@ -591,11 +497,6 @@ public class IntDict {
 
 
   // return the key for the minimum value
-
-    /**
-     *
-     * @return
-     */
   public String minKey() {
     checkMinMax("minKey");
     int index = minIndex();
@@ -607,11 +508,6 @@ public class IntDict {
 
 
   // return the minimum value, or throw an error if there are no values
-
-    /**
-     *
-     * @return
-     */
   public int minValue() {
     checkMinMax("minValue");
     return values[minIndex()];
@@ -619,11 +515,6 @@ public class IntDict {
 
 
   // return the index of the max value
-
-    /**
-     *
-     * @return
-     */
   public int maxIndex() {
     //checkMinMax("maxIndex");
     if (count == 0) {
@@ -641,8 +532,7 @@ public class IntDict {
   }
 
 
-  /** return the key corresponding to the maximum value or null if no entries
-     * @return  */
+  /** return the key corresponding to the maximum value or null if no entries */
   public String maxKey() {
     //checkMinMax("maxKey");
     int index = maxIndex();
@@ -654,21 +544,13 @@ public class IntDict {
 
 
   // return the maximum value or throw an error if zero length
-
-    /**
-     *
-     * @return
-     */
   public int maxValue() {
     checkMinMax("maxIndex");
     return values[maxIndex()];
   }
 
-    /**
-     *
-     * @return
-     */
-    public int sum() {
+
+  public int sum() {
     long amount = sumLong();
     if (amount > Integer.MAX_VALUE) {
       throw new RuntimeException("sum() exceeds " + Integer.MAX_VALUE + ", use sumLong()");
@@ -679,11 +561,8 @@ public class IntDict {
     return (int) amount;
   }
 
-    /**
-     *
-     * @return
-     */
-    public long sumLong() {
+
+  public long sumLong() {
     long sum = 0;
     for (int i = 0; i < count; i++) {
       sum += values[i];
@@ -691,22 +570,14 @@ public class IntDict {
     return sum;
   }
 
-    /**
-     *
-     * @param what
-     * @return
-     */
-    public int index(String what) {
+
+  public int index(String what) {
     Integer found = indices.get(what);
     return (found == null) ? -1 : found.intValue();
   }
 
-    /**
-     *
-     * @param what
-     * @param much
-     */
-    protected void create(String what, int much) {
+
+  protected void create(String what, int much) {
     if (count == keys.length) {
       keys = PApplet.expand(keys);
       values = PApplet.expand(values);
@@ -718,30 +589,25 @@ public class IntDict {
   }
 
   /**
-     * @param key
-     * @return 
    * @webref intdict:method
    * @brief Remove a key/value pair
    */
   public int remove(String key) {
     int index = index(key);
-    if (index != -1) {
-      removeIndex(index);
+    if (index == -1) {
+      throw new NoSuchElementException("'" + key + "' not found");
     }
-    return index;
+    int value = values[index];
+    removeIndex(index);
+    return value;
   }
 
-    /**
-     *
-     * @param index
-     * @return
-     */
-    public String removeIndex(int index) {
+
+  public int removeIndex(int index) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException(index);
     }
-    //System.out.println("index is " + which + " and " + keys[which]);
-    String key = keys[index];
+    int value = values[index];
     indices.remove(keys[index]);
     for (int i = index; i < count-1; i++) {
       keys[i] = keys[i+1];
@@ -751,15 +617,11 @@ public class IntDict {
     count--;
     keys[count] = null;
     values[count] = 0;
-    return key;
+    return value;
   }
 
-    /**
-     *
-     * @param a
-     * @param b
-     */
-    public void swap(int a, int b) {
+
+  public void swap(int a, int b) {
     String tkey = keys[a];
     int tvalue = values[a];
     keys[a] = keys[b];
@@ -826,21 +688,13 @@ public class IntDict {
     sortValuesReverse(true);
   }
 
-    /**
-     *
-     * @param stable
-     */
-    public void sortValuesReverse(boolean stable) {
+
+  public void sortValuesReverse(boolean stable) {
     sortImpl(false, true, stable);
   }
 
-    /**
-     *
-     * @param useKeys
-     * @param reverse
-     * @param stable
-     */
-    protected void sortImpl(final boolean useKeys, final boolean reverse,
+
+  protected void sortImpl(final boolean useKeys, final boolean reverse,
                           final boolean stable) {
     Sort s = new Sort() {
       @Override
@@ -849,7 +703,7 @@ public class IntDict {
       }
 
       @Override
-      public float compare(int a, int b) {
+      public int compare(int a, int b) {
         int diff = 0;
         if (useKeys) {
           diff = keys[a].compareToIgnoreCase(keys[b]);
@@ -893,8 +747,7 @@ public class IntDict {
   }
 
 
-  /** Returns a duplicate copy of this object.
-     * @return  */
+  /** Returns a duplicate copy of this object. */
   public IntDict copy() {
     IntDict outgoing = new IntDict(count);
     System.arraycopy(keys, 0, outgoing.keys, 0, count);
@@ -906,10 +759,8 @@ public class IntDict {
     return outgoing;
   }
 
-    /**
-     *
-     */
-    public void print() {
+
+  public void print() {
     for (int i = 0; i < size(); i++) {
       System.out.println(keys[i] + " = " + values[i]);
     }
@@ -917,8 +768,17 @@ public class IntDict {
 
 
   /**
-   * Write tab-delimited entries out to
-   * @param writer
+   * Save tab-delimited entries to a file (TSV format, UTF-8 encoding)
+   */
+  public void save(File file) {
+    PrintWriter writer = PApplet.createWriter(file);
+    write(writer);
+    writer.close();
+  }
+
+
+  /**
+   * Write tab-delimited entries to a PrintWriter
    */
   public void write(PrintWriter writer) {
     for (int i = 0; i < count; i++) {
@@ -930,7 +790,6 @@ public class IntDict {
 
   /**
    * Return this dictionary as a String in JSON format.
-     * @return 
    */
   public String toJSON() {
     StringList items = new StringList();
@@ -940,11 +799,8 @@ public class IntDict {
     return "{ " + items.join(", ") + " }";
   }
 
-    /**
-     *
-     * @return
-     */
-    @Override
+
+  @Override
   public String toString() {
     return getClass().getSimpleName() + " size=" + size() + " " + toJSON();
   }

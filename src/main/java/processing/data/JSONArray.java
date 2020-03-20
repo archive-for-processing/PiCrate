@@ -114,7 +114,6 @@ public class JSONArray {
 
 
   /**
-     * @param reader
    * @nowebref
    */
   public JSONArray(Reader reader) {
@@ -163,7 +162,6 @@ public class JSONArray {
 
 
   /**
-     * @param list
    * @nowebref
    */
   public JSONArray(IntList list) {
@@ -175,7 +173,6 @@ public class JSONArray {
 
 
   /**
-     * @param list
    * @nowebref
    */
   public JSONArray(FloatList list) {
@@ -187,7 +184,6 @@ public class JSONArray {
 
 
   /**
-     * @param list
    * @nowebref
    */
   public JSONArray(StringList list) {
@@ -232,7 +228,6 @@ public class JSONArray {
   // TODO not decided whether we keep this one, but used heavily by JSONObject
   /**
    * Construct a JSONArray from an array
-     * @param array
    * @throws RuntimeException If not an array.
    */
   protected JSONArray(Object array) {
@@ -391,10 +386,9 @@ public class JSONArray {
 
 
   /**
-   * Get a value from an index as a float.JSON uses 'double' values
- internally, so this is simply getDouble() cast to a float.
+   * Get a value from an index as a float. JSON uses 'double' values
+   * internally, so this is simply getDouble() cast to a float.
    *
-     * @return 
    * @webref jsonarray:method
    * @brief Gets the float value associated with an index
    * @param index must be between 0 and length() - 1
@@ -406,13 +400,8 @@ public class JSONArray {
     return (float) getDouble(index);
   }
 
-    /**
-     *
-     * @param index
-     * @param defaultValue
-     * @return
-     */
-    public float getFloat(int index, float defaultValue) {
+
+  public float getFloat(int index, float defaultValue) {
     try {
       return getFloat(index);
     } catch (Exception e) {
@@ -527,13 +516,8 @@ public class JSONArray {
     throw new RuntimeException("JSONArray[" + index + "] is not a JSONArray.");
   }
 
-    /**
-     *
-     * @param index
-     * @param defaultValue
-     * @return
-     */
-    public JSONArray getJSONArray(int index, JSONArray defaultValue) {
+
+  public JSONArray getJSONArray(int index, JSONArray defaultValue) {
     try {
       return getJSONArray(index);
     } catch (Exception e) {
@@ -563,13 +547,8 @@ public class JSONArray {
     throw new RuntimeException("JSONArray[" + index + "] is not a JSONObject.");
   }
 
-    /**
-     *
-     * @param index
-     * @param defaultValue
-     * @return
-     */
-    public JSONObject getJSONObject(int index, JSONObject defaultValue) {
+
+  public JSONObject getJSONObject(int index, JSONObject defaultValue) {
     try {
       return getJSONObject(index);
     } catch (Exception e) {
@@ -581,7 +560,6 @@ public class JSONArray {
   /**
    * Get this entire array as a String array.
    *
-     * @return 
    * @webref jsonarray:method
    * @brief Gets the entire array as an array of Strings
    * @see JSONArray#getIntArray()
@@ -596,9 +574,8 @@ public class JSONArray {
 
 
   /**
-   * Get this entire array as an int array.Everything must be an int.
+   * Get this entire array as an int array. Everything must be an int.
    *
-     * @return 
    * @webref jsonarray:method
    * @brief Gets the entire array as array of ints
    * @see JSONArray#getStringArray()
@@ -612,8 +589,7 @@ public class JSONArray {
   }
 
 
-  /** *  Get this entire array as a long array.Everything must be an long.
-     * @return  */
+  /** Get this entire array as a long array. Everything must be an long. */
   public long[] getLongArray() {
     long[] outgoing = new long[size()];
     for (int i = 0; i < size(); i++) {
@@ -623,8 +599,7 @@ public class JSONArray {
   }
 
 
-  /** *  Get this entire array as a float array.Everything must be an float.
-     * @return  */
+  /** Get this entire array as a float array. Everything must be an float. */
   public float[] getFloatArray() {
     float[] outgoing = new float[size()];
     for (int i = 0; i < size(); i++) {
@@ -634,8 +609,7 @@ public class JSONArray {
   }
 
 
-  /** *  Get this entire array as a double array.Everything must be an double.
-     * @return  */
+  /** Get this entire array as a double array. Everything must be an double. */
   public double[] getDoubleArray() {
     double[] outgoing = new double[size()];
     for (int i = 0; i < size(); i++) {
@@ -645,8 +619,7 @@ public class JSONArray {
   }
 
 
-  /** *  Get this entire array as a boolean array.Everything must be a boolean.
-     * @return  */
+  /** Get this entire array as a boolean array. Everything must be a boolean. */
   public boolean[] getBooleanArray() {
     boolean[] outgoing = new boolean[size()];
     for (int i = 0; i < size(); i++) {
@@ -829,7 +802,6 @@ public class JSONArray {
 
   /**
    * @param value a JSONArray value
-     * @return 
    */
   public JSONArray append(JSONArray value) {
     myArrayList.add(value);
@@ -839,7 +811,6 @@ public class JSONArray {
 
   /**
    * @param value a JSONObject value
-     * @return 
    */
   public JSONArray append(JSONObject value) {
     myArrayList.add(value);
@@ -1003,7 +974,6 @@ public class JSONArray {
 //  }
 
   /**
-     * @return 
    * @webref jsonarray:method
    * @brief Sets the JSONArray value associated with an index value
    * @param index the index value to target
@@ -1018,7 +988,6 @@ public class JSONArray {
   }
 
   /**
-     * @return 
    * @webref jsonarray:method
    * @brief Sets the JSONObject value associated with an index value
    * @param index the index value to target
@@ -1129,13 +1098,6 @@ public class JSONArray {
 //    return write(PApplet.createWriter(output), null);
 //  }
 
-    /**
-     *
-     * @param file
-     * @param options
-     * @return
-     */
-
 
   public boolean save(File file, String options) {
     PrintWriter writer = PApplet.createWriter(file);
@@ -1144,22 +1106,13 @@ public class JSONArray {
     return success;
   }
 
-    /**
-     *
-     * @param output
-     * @return
-     */
-    public boolean write(PrintWriter output) {
+
+  public boolean write(PrintWriter output) {
     return write(output, null);
   }
 
-    /**
-     *
-     * @param output
-     * @param options
-     * @return
-     */
-    public boolean write(PrintWriter output, String options) {
+
+  public boolean write(PrintWriter output, String options) {
     int indentFactor = 2;
     if (options != null) {
       String[] opts = PApplet.split(options, ',');
@@ -1183,10 +1136,9 @@ public class JSONArray {
 
 
   /**
-   * Return the JSON data formatted with two spaces for indents.Chosen to do this since it's the most common case (e.g.
-   * with println()).
- Same as format(2). Use the format() function for more options.
-     * @return 
+   * Return the JSON data formatted with two spaces for indents.
+   * Chosen to do this since it's the most common case (e.g. with println()).
+   * Same as format(2). Use the format() function for more options.
    */
   @Override
   public String toString() {
@@ -1234,7 +1186,6 @@ public class JSONArray {
    * <p>
    * Warning: This method assumes that the data structure is acyclic.
    *
-     * @param writer
    * @param indentFactor
    *            The number of spaces to add to each level of indentation.
    *            Use -1 to specify no indentation and no newlines.

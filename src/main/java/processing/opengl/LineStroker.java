@@ -29,10 +29,6 @@ package processing.opengl;
 
 import processing.core.PMatrix2D;
 
-/**
- *
- * @author Martin Prout
- */
 public class LineStroker  {
   private LineStroker output;
   private int capStyle;
@@ -61,9 +57,9 @@ public class LineStroker  {
 
   private boolean[] penIncluded;
   private int[] join;
-  private final int[] offset = new int[2];
+  private int[] offset = new int[2];
   private int[] reverse = new int[100];
-  private final int[] miter = new int[2];
+  private int[] miter = new int[2];
   private long miterLimitSq;
   private int prev;
   private int rindex;
@@ -118,7 +114,7 @@ public class LineStroker  {
    * @param output
    *          an output <code>LineStroker</code>.
    */
-  private void setOutput(LineStroker output) {
+  public void setOutput(LineStroker output) {
     this.output = output;
   }
 
@@ -141,7 +137,7 @@ public class LineStroker  {
    *          required in order to produce consistently shaped end caps and
    *          joins.
    */
-  public final void setParameters(int lineWidth, int capStyle, int joinStyle,
+  public void setParameters(int lineWidth, int capStyle, int joinStyle,
                             int miterLimit, PMatrix2D transform) {
     this.m00 = LinePath.FloatToS15_16(transform.m00);
     this.m01 = LinePath.FloatToS15_16(transform.m01);
@@ -262,14 +258,18 @@ public class LineStroker  {
     if (side == 0) {
       centerSide = side(cx, cy, xa, ya, xb, yb);
     } else {
-      centerSide = (side == 1);
+      centerSide = (side == 1) ? true : false;
     }
     for (int i = 0; i < numPenSegments; i++) {
       px = cx + pen_dx[i];
       py = cy + pen_dy[i];
 
       boolean penSide = side(px, py, xa, ya, xb, yb);
-      penIncluded[i] = penSide != centerSide;
+      if (penSide != centerSide) {
+        penIncluded[i] = true;
+      } else {
+        penIncluded[i] = false;
+      }
     }
 
     int start = -1, end = -1;
@@ -415,13 +415,7 @@ public class LineStroker  {
     }
   }
 
-    /**
-     *
-     * @param x0
-     * @param y0
-     * @param c0
-     */
-    public void moveTo(int x0, int y0, int c0) {
+  public void moveTo(int x0, int y0, int c0) {
     // System.out.println("LineStroker.moveTo(" + x0/65536.0 + ", " + y0/65536.0 + ")");
 
     if (lineToOrigin) {
@@ -445,21 +439,12 @@ public class LineStroker  {
 
   boolean joinSegment = false;
 
-    /**
-     *
-     */
-    public void lineJoin() {
+  public void lineJoin() {
     // System.out.println("LineStroker.lineJoin()");
     this.joinSegment = true;
   }
 
-    /**
-     *
-     * @param x1
-     * @param y1
-     * @param c1
-     */
-    public void lineTo(int x1, int y1, int c1) {
+  public void lineTo(int x1, int y1, int c1) {
     // System.out.println("LineStroker.lineTo(" + x1/65536.0 + ", " + y1/65536.0 + ")");
 
     if (lineToOrigin) {
@@ -531,10 +516,7 @@ public class LineStroker  {
     this.prev = LinePath.SEG_LINETO;
   }
 
-    /**
-     *
-     */
-    public void close() {
+  public void close() {
     if (lineToOrigin) {
       // ignore the previous lineTo
       lineToOrigin = false;
@@ -608,10 +590,7 @@ public class LineStroker  {
     emitClose();
   }
 
-    /**
-     *
-     */
-    public void end() {
+  public void end() {
     if (lineToOrigin) {
       // not closing the path, do the previous lineTo
       lineToImpl(sx0, sy0, scolor0, joinToOrigin);

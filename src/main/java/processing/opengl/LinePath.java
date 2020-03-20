@@ -115,35 +115,17 @@ public class LinePath {
 
   static final int EXPAND_MAX = 500;
 
-    /**
-     *
-     */
-    protected byte[] pointTypes;
+  protected byte[] pointTypes;
 
-    /**
-     *
-     */
-    protected float[] floatCoords;
+  protected float[] floatCoords;
 
-    /**
-     *
-     */
-    protected int[] pointColors;
+  protected int[] pointColors;
 
-    /**
-     *
-     */
-    protected int numTypes;
+  protected int numTypes;
 
-    /**
-     *
-     */
-    protected int numCoords;
+  protected int numCoords;
 
-    /**
-     *
-     */
-    protected int windingRule;
+  protected int windingRule;
 
 
   /**
@@ -237,7 +219,6 @@ public class LinePath {
    *          the specified X coordinate
    * @param y
    *          the specified Y coordinate
-     * @param c
    * @see LinePath#moveTo
    */
   public final void moveTo(float x, float y, int c) {
@@ -266,7 +247,6 @@ public class LinePath {
    *          the specified X coordinate
    * @param y
    *          the specified Y coordinate
-     * @param c
    * @see LinePath#lineTo
    */
   public final void lineTo(float x, float y, int c) {
@@ -283,7 +263,6 @@ public class LinePath {
    * the {@code LinePath} class does not guarantee that modifications to the
    * geometry of this {@code LinePath} object do not affect any iterations of that
    * geometry that are already in process.
-     * @return 
    */
   public PathIterator getPathIterator() {
     return new PathIterator(this);
@@ -343,10 +322,8 @@ public class LinePath {
     numTypes = numCoords = 0;
   }
 
-    /**
-     *
-     */
-    static public class PathIterator {
+
+  static public class PathIterator {
     float floatCoords[];
 
     int typeIdx;
@@ -357,7 +334,7 @@ public class LinePath {
 
     LinePath path;
 
-    static final int[] CURVE_COORDS = { 2, 2, 0 };
+    static final int curvecoords[] = { 2, 2, 0 };
 
     PathIterator(LinePath p2df) {
       this.path = p2df;
@@ -366,33 +343,23 @@ public class LinePath {
       colorIdx = 0;
     }
 
-      /**
-       *
-       * @param coords
-       * @return
-       */
-      public int currentSegment(float[] coords) {
+    public int currentSegment(float[] coords) {
       int type = path.pointTypes[typeIdx];
-      int numCoords = CURVE_COORDS[type];
+      int numCoords = curvecoords[type];
       if (numCoords > 0) {
         System.arraycopy(floatCoords, pointIdx, coords, 0, numCoords);
         int color = path.pointColors[colorIdx];
         coords[numCoords + 0] = (color >> 24) & 0xFF;
         coords[numCoords + 1] = (color >> 16) & 0xFF;
         coords[numCoords + 2] = (color >>  8) & 0xFF;
-        coords[numCoords + 3] = (color) & 0xFF;
+        coords[numCoords + 3] = (color >>  0) & 0xFF;
       }
       return type;
     }
 
-      /**
-       *
-       * @param coords
-       * @return
-       */
-      public int currentSegment(double[] coords) {
+    public int currentSegment(double[] coords) {
       int type = path.pointTypes[typeIdx];
-      int numCoords = CURVE_COORDS[type];
+      int numCoords = curvecoords[type];
       if (numCoords > 0) {
         for (int i = 0; i < numCoords; i++) {
           coords[i] = floatCoords[pointIdx + i];
@@ -401,34 +368,23 @@ public class LinePath {
         coords[numCoords + 0] = (color >> 24) & 0xFF;
         coords[numCoords + 1] = (color >> 16) & 0xFF;
         coords[numCoords + 2] = (color >>  8) & 0xFF;
-        coords[numCoords + 3] = (color) & 0xFF;
+        coords[numCoords + 3] = (color >>  0) & 0xFF;
       }
       return type;
     }
 
-      /**
-       *
-       * @return
-       */
-      public int getWindingRule() {
+    public int getWindingRule() {
       return path.getWindingRule();
     }
 
-      /**
-       *
-       * @return
-       */
-      public boolean isDone() {
+    public boolean isDone() {
       return (typeIdx >= path.numTypes);
     }
 
-      /**
-       *
-       */
-      public void next() {
+    public void next() {
       int type = path.pointTypes[typeIdx++];
-      if (0 < CURVE_COORDS[type]) {
-        pointIdx += CURVE_COORDS[type];
+      if (0 < curvecoords[type]) {
+        pointIdx += curvecoords[type];
         colorIdx++;
       }
     }
@@ -439,31 +395,14 @@ public class LinePath {
   //
   // Stroked path methods
 
-    /**
-     *
-     * @param src
-     * @param weight
-     * @param caps
-     * @param join
-     * @return
-     */
-
 
   static public LinePath createStrokedPath(LinePath src, float weight,
                                            int caps, int join) {
     return createStrokedPath(src, weight, caps, join, defaultMiterlimit, null);
   }
 
-    /**
-     *
-     * @param src
-     * @param weight
-     * @param caps
-     * @param join
-     * @param miterlimit
-     * @return
-     */
-    static public LinePath createStrokedPath(LinePath src, float weight,
+
+  static public LinePath createStrokedPath(LinePath src, float weight,
                                            int caps, int join, float miterlimit) {
     return createStrokedPath(src, weight, caps, join, miterlimit, null);
   }
@@ -482,7 +421,6 @@ public class LinePath {
    *          the decoration applied where path segments meet
    * @param miterlimit
    * @param transform
-     * @return 
    *
    */
   static public LinePath createStrokedPath(LinePath src, float weight,
@@ -568,13 +506,6 @@ public class LinePath {
   //
   // Utility methods
 
-    /**
-     *
-     * @param source
-     * @param length
-     * @return
-     */
-
 
   public static float[] copyOf(float[] source, int length) {
     float[] target = new float[length];
@@ -587,13 +518,8 @@ public class LinePath {
     return target;
   }
 
-    /**
-     *
-     * @param source
-     * @param length
-     * @return
-     */
-    public static byte[] copyOf(byte[] source, int length) {
+
+  public static byte[] copyOf(byte[] source, int length) {
     byte[] target = new byte[length];
     for (int i = 0; i < target.length; i++) {
       if (i > source.length - 1)
@@ -604,13 +530,8 @@ public class LinePath {
     return target;
   }
 
-    /**
-     *
-     * @param source
-     * @param length
-     * @return
-     */
-    public static int[] copyOf(int[] source, int length) {
+
+  public static int[] copyOf(int[] source, int length) {
     int[] target = new int[length];
     for (int i = 0; i < target.length; i++) {
       if (i > source.length - 1)
@@ -623,12 +544,6 @@ public class LinePath {
 
 
   // From Ken Turkowski, _Fixed-Point Square Root_, In Graphics Gems V
-
-    /**
-     *
-     * @param x
-     * @return
-     */
   public static int isqrt(int x) {
     int fracbits = 16;
 
@@ -651,12 +566,8 @@ public class LinePath {
     return root;
   }
 
-    /**
-     *
-     * @param x
-     * @return
-     */
-    public static long lsqrt(long x) {
+
+  public static long lsqrt(long x) {
     int fracbits = 16;
 
     long root = 0;
@@ -678,33 +589,18 @@ public class LinePath {
     return root;
   }
 
-    /**
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public static double hypot(double x, double y) {
+
+  public static double hypot(double x, double y) {
     return Math.sqrt(x * x + y * y);
   }
 
-    /**
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public static int hypot(int x, int y) {
+
+  public static int hypot(int x, int y) {
     return (int) ((lsqrt((long) x * x + (long) y * y) + 128) >> 8);
   }
 
-    /**
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public static long hypot(long x, long y) {
+
+  public static long hypot(long x, long y) {
     return (lsqrt(x * x + y * y) + 128) >> 8;
   }
 

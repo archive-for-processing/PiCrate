@@ -8,17 +8,10 @@ import processing.core.PMatrix3D;
 import processing.core.PShape;
 import processing.core.PSurface;
 
-/**
- *
- * @author Martin Prout
- */
 public class PGraphicsFX2D extends PGraphics {
 
-  final String message = "FX2D renderer not supported in this version of picrate";
+  final String message = "FX2D renderer not supported in this version of JRubyArt";
 
-  /**
-   *
-   */
   public PGraphicsFX2D() {
   }
 
@@ -361,5 +354,4 @@ public class PGraphicsFX2D extends PGraphics {
   public void vertex(float x, float y, float z, float u, float v) {
     throw new UnsupportedOperationException(message);
   }
-
 }

@@ -28,16 +28,10 @@ import processing.core.PGraphics;
 import processing.core.PShape;
 import processing.core.PShapeOBJ;
 
-/**
- *
- * @author Martin Prout
- */
+
 public class PGraphics3D extends PGraphicsOpenGL {
 
-    /**
-     *
-     */
-    public PGraphics3D() {
+  public PGraphics3D() {
     super();
   }
 
@@ -63,10 +57,6 @@ public class PGraphics3D extends PGraphicsOpenGL {
 
   // PROJECTION
 
-    /**
-     *
-     */
-
 
   @Override
   protected void defaultPerspective() {
@@ -78,10 +68,6 @@ public class PGraphics3D extends PGraphicsOpenGL {
 
   // CAMERA
 
-    /**
-     *
-     */
-
 
   @Override
   protected void defaultCamera() {
@@ -92,10 +78,6 @@ public class PGraphics3D extends PGraphicsOpenGL {
   //////////////////////////////////////////////////////////////
 
   // MATRIX MORE!
-
-    /**
-     *
-     */
 
 
   @Override
@@ -119,10 +101,8 @@ public class PGraphics3D extends PGraphicsOpenGL {
     updateProjmodelview();
   }
 
-    /**
-     *
-     */
-    @Override
+
+  @Override
   protected void end2D() {
     popMatrix();
     popProjection();
@@ -134,25 +114,13 @@ public class PGraphics3D extends PGraphicsOpenGL {
 
   // SHAPE I/O
 
-    /**
-     *
-     * @param extension
-     * @return
-     */
-
 
   static protected boolean isSupportedExtension(String extension) {
     return extension.equals("obj");
   }
 
-    /**
-     *
-     * @param pg
-     * @param filename
-     * @param extension
-     * @return
-     */
-    static protected PShape loadShapeImpl(PGraphics pg, String filename,
+
+  static protected PShape loadShapeImpl(PGraphics pg, String filename,
                                                       String extension) {
     PShapeOBJ obj = null;
 

@@ -47,29 +47,18 @@ public class PShapeJava2D extends PShapeSVG {
   Paint strokeGradientPaint;
   Paint fillGradientPaint;
 
-    /**
-     *
-     * @param svg
-     */
-    public PShapeJava2D(XML svg) {
+
+  public PShapeJava2D(XML svg) {
     super(svg);
   }
 
-    /**
-     *
-     * @param parent
-     * @param properties
-     * @param parseKids
-     */
-    public PShapeJava2D(PShapeSVG parent, XML properties, boolean parseKids) {
+
+  public PShapeJava2D(PShapeSVG parent, XML properties, boolean parseKids) {
     super(parent, properties, parseKids);
   }
 
-    /**
-     *
-     * @param parent
-     */
-    @Override
+
+  @Override
   protected void setParent(PShapeSVG parent) {
     super.setParent(parent);
 
@@ -85,11 +74,7 @@ public class PShapeJava2D extends PShapeSVG {
   }
 
 
-  /** Factory method for subclasses.
-     * @param parent
-     * @param properties
-     * @param parseKids
-     * @return  */
+  /** Factory method for subclasses. */
   @Override
   protected PShapeSVG createShape(PShapeSVG parent, XML properties, boolean parseKids) {
     return new PShapeJava2D(parent, properties, parseKids);
@@ -131,7 +116,6 @@ public class PShapeJava2D extends PShapeSVG {
       this.opacity = opacity;
     }
 
-    @Override
     public PaintContext createContext(ColorModel cm,
                                       Rectangle deviceBounds, Rectangle2D userBounds,
                                       AffineTransform xform, RenderingHints hints) {
@@ -141,7 +125,6 @@ public class PShapeJava2D extends PShapeSVG {
                                        (float) t2.getX(), (float) t2.getY());
     }
 
-    @Override
     public int getTransparency() {
       return TRANSLUCENT;  // why not.. rather than checking each color
     }
@@ -157,13 +140,10 @@ public class PShapeJava2D extends PShapeSVG {
         this.ty2 = ty2;
       }
 
-      @Override
       public void dispose() { }
 
-      @Override
       public ColorModel getColorModel() { return ColorModel.getRGBdefault(); }
 
-      @Override
       public Raster getRaster(int x, int y, int w, int h) {
         WritableRaster raster =
           getColorModel().createCompatibleWritableRaster(w, h);
@@ -260,14 +240,12 @@ public class PShapeJava2D extends PShapeSVG {
       this.opacity = opacity;
     }
 
-    @Override
     public PaintContext createContext(ColorModel cm,
                                       Rectangle deviceBounds, Rectangle2D userBounds,
                                       AffineTransform xform, RenderingHints hints) {
       return new RadialGradientContext();
     }
 
-    @Override
     public int getTransparency() {
       return TRANSLUCENT;
     }
@@ -275,13 +253,10 @@ public class PShapeJava2D extends PShapeSVG {
     public class RadialGradientContext implements PaintContext {
       int ACCURACY = 5;
 
-      @Override
       public void dispose() {}
 
-      @Override
       public ColorModel getColorModel() { return ColorModel.getRGBdefault(); }
 
-      @Override
       public Raster getRaster(int x, int y, int w, int h) {
         WritableRaster raster =
           getColorModel().createCompatibleWritableRaster(w, h);
@@ -323,12 +298,8 @@ public class PShapeJava2D extends PShapeSVG {
     }
   }
 
-    /**
-     *
-     * @param gradient
-     * @return
-     */
-    protected Paint calcGradientPaint(Gradient gradient) {
+
+  protected Paint calcGradientPaint(Gradient gradient) {
     if (gradient instanceof LinearGradient) {
 //      System.out.println("creating linear gradient");
       LinearGradient grad = (LinearGradient) gradient;
@@ -372,11 +343,6 @@ public class PShapeJava2D extends PShapeSVG {
 
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-    /**
-     *
-     * @param g
-     */
 
 
   @Override

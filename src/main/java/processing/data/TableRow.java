@@ -14,83 +14,73 @@ import java.io.PrintWriter;
 public interface TableRow {
 
   /**
-   * @return 
    * @webref tablerow:method
    * @brief Get an String value from the specified column
    * @param column ID number of the column to reference
    * @see TableRow#getInt(int)
    * @see TableRow#getFloat(int)
    */
-  String getString(int column);
+  public String getString(int column);
 
   /**
    * @param columnName title of the column to reference
-   * @return 
    */
-  String getString(String columnName);
+  public String getString(String columnName);
 
   /**
-   * @return 
    * @webref tablerow:method
    * @brief Get an integer value from the specified column
    * @param column ID number of the column to reference
    * @see TableRow#getFloat(int)
    * @see TableRow#getString(int)
    */
-  int getInt(int column);
+  public int getInt(int column);
 
   /**
    * @param columnName title of the column to reference
-   * @return 
    */
-  int getInt(String columnName);
+  public int getInt(String columnName);
 
   /**
-     * @return 
    * @brief Get a long value from the specified column
    * @param column ID number of the column to reference
    * @see TableRow#getFloat(int)
    * @see TableRow#getString(int)
    */
 
-  long getLong(int column);
+  public long getLong(int column);
 
   /**
    * @param columnName title of the column to reference
-     * @return 
    */
-  long getLong(String columnName);
+  public long getLong(String columnName);
 
   /**
-     * @return 
    * @webref tablerow:method
    * @brief Get a float value from the specified column
    * @param column ID number of the column to reference
    * @see TableRow#getInt(int)
    * @see TableRow#getString(int)
    */
-  float getFloat(int column);
+  public float getFloat(int column);
 
   /**
    * @param columnName title of the column to reference
-     * @return 
    */
-  float getFloat(String columnName);
+  public float getFloat(String columnName);
   
   /**
-     * @return 
    * @brief Get a double value from the specified column
    * @param column ID number of the column to reference
    * @see TableRow#getInt(int)
    * @see TableRow#getString(int)
    */
-  double getDouble(int column);
+  public double getDouble(int column);
   
   /**
    * @param columnName title of the column to reference
-     * @return 
    */
-  double getDouble(String columnName);
+  public double getDouble(String columnName);
 
   /**
    * @webref tablerow:method
@@ -100,12 +90,11 @@ public interface TableRow {
    * @see TableRow#setInt(int, int)
    * @see TableRow#setFloat(int, float)
    */
-  void setString(int column, String value);
+  public void setString(int column, String value);
   /**
    * @param columnName title of the target column
-     * @param value
    */
-  void setString(String columnName, String value);
+  public void setString(String columnName, String value);
 
   /**
    * @webref tablerow:method
@@ -115,13 +104,12 @@ public interface TableRow {
    * @see TableRow#setFloat(int, float)
    * @see TableRow#setString(int, String)
    */
-  void setInt(int column, int value);
+  public void setInt(int column, int value);
 
   /**
    * @param columnName title of the target column
-     * @param value
    */
-  void setInt(String columnName, int value);
+  public void setInt(String columnName, int value);
   
   /**
    * @brief Store a long value in the specified column
@@ -130,13 +118,12 @@ public interface TableRow {
    * @see TableRow#setFloat(int, float)
    * @see TableRow#setString(int, String)
    */
-  void setLong(int column, long value);
+  public void setLong(int column, long value);
   
   /**
    * @param columnName title of the target column
-     * @param value
    */
-  void setLong(String columnName, long value);
+  public void setLong(String columnName, long value);
 
   /**
    * @webref tablerow:method
@@ -146,13 +133,12 @@ public interface TableRow {
    * @see TableRow#setInt(int, int)
    * @see TableRow#setString(int, String)
    */
-  void setFloat(int column, float value);
+  public void setFloat(int column, float value);
   
   /**
    * @param columnName title of the target column
-     * @param value
    */
-  void setFloat(String columnName, float value);
+  public void setFloat(String columnName, float value);
 
   /**
    * @brief Store a double value in the specified column
@@ -161,39 +147,37 @@ public interface TableRow {
    * @see TableRow#setFloat(int, float)
    * @see TableRow#setString(int, String)
    */
-  void setDouble(int column, double value);
+  public void setDouble(int column, double value);
   
   /**
    * @param columnName title of the target column
-     * @param value
    */
-  void setDouble(String columnName, double value);
+  public void setDouble(String columnName, double value);
 
   /**
    * @webref tablerow:method
    * @brief Get the column count.
    * @return count of all columns
    */
-  int getColumnCount();
+  public int getColumnCount();
   
   /**
    * @brief Get the column type.
    * @param columnName title of the target column
    * @return type of the column
    */
-  int getColumnType(String columnName);
+  public int getColumnType(String columnName);
   
   /**
    * @param column ID number of the target column
-     * @return 
    */
-  int getColumnType(int column);
+  public int getColumnType(int column);
   
   /**
    * @brief Get the all column types
    * @return list of all column types
    */
-  int[] getColumnTypes();
+  public int[] getColumnTypes();
 
   /**
    * @webref tablerow:method
@@ -201,22 +185,14 @@ public interface TableRow {
    * @param column ID number of the target column
    * @return title of the column
    */
-  String getColumnTitle(int column);
+  public String getColumnTitle(int column);
 
   /**
    * @brief Get the all column titles
    * @return list of all column titles
    */
-  String[] getColumnTitles();
+  public String[] getColumnTitles();
 
-    /**
-     *
-     * @param writer
-     */
-    void write(PrintWriter writer);
-
-    /**
-     *
-     */
-    void print();
+  public void write(PrintWriter writer);
+  public void print();
 }

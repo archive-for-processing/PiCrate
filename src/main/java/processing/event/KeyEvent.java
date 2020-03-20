@@ -22,42 +22,19 @@
 
 package processing.event;
 
-/**
- *
- * @author Martin Prout
- */
+
 public class KeyEvent extends Event {
-
-    /**
-     *
-     */
-    static public final int PRESS = 1;
-
-    /**
-     *
-     */
-    static public final int RELEASE = 2;
-
-    /**
-     *
-     */
-    static public final int TYPE = 3;
+  static public final int PRESS = 1;
+  static public final int RELEASE = 2;
+  static public final int TYPE = 3;
 
   char key;
   int keyCode;
 
   boolean isAutoRepeat;
 
-    /**
-     *
-     * @param nativeObject
-     * @param millis
-     * @param action
-     * @param modifiers
-     * @param key
-     * @param keyCode
-     */
-    public KeyEvent(Object nativeObject,
+
+  public KeyEvent(Object nativeObject,
                   long millis, int action, int modifiers,
                   char key, int keyCode) {
     super(nativeObject, millis, action, modifiers);
@@ -66,17 +43,7 @@ public class KeyEvent extends Event {
     this.keyCode = keyCode;
   }
 
-    /**
-     *
-     * @param nativeObject
-     * @param millis
-     * @param action
-     * @param modifiers
-     * @param key
-     * @param keyCode
-     * @param isAutoRepeat
-     */
-    public KeyEvent(Object nativeObject,
+  public KeyEvent(Object nativeObject,
                   long millis, int action, int modifiers,
                   char key, int keyCode, boolean isAutoRepeat) {
     super(nativeObject, millis, action, modifiers);
@@ -86,27 +53,18 @@ public class KeyEvent extends Event {
     this.isAutoRepeat = isAutoRepeat;
   }
 
-    /**
-     *
-     * @return
-     */
-    public char getKey() {
+
+  public char getKey() {
     return key;
   }
 
-    /**
-     *
-     * @return
-     */
-    public int getKeyCode() {
+
+  public int getKeyCode() {
     return keyCode;
   }
 
-    /**
-     *
-     * @return
-     */
-    public boolean isAutoRepeat() {
+
+  public boolean isAutoRepeat() {
     return isAutoRepeat;
   }
 }

@@ -29,16 +29,10 @@ import processing.core.PMatrix3D;
 import processing.core.PShape;
 import processing.core.PShapeSVG;
 
-/**
- *
- * @author Martin Prout
- */
+
 public class PGraphics2D extends PGraphicsOpenGL {
 
-    /**
-     *
-     */
-    public PGraphics2D() {
+  public PGraphics2D() {
     super();
   }
 
@@ -119,10 +113,8 @@ public class PGraphics2D extends PGraphicsOpenGL {
     showMethodWarning("frustum");
   }
 
-    /**
-     *
-     */
-    @Override
+
+  @Override
   protected void defaultPerspective() {
     super.ortho(0, width, -height, 0, -1, +1);
   }
@@ -158,10 +150,8 @@ public class PGraphics2D extends PGraphicsOpenGL {
     showMethodWarning("camera");
   }
 
-    /**
-     *
-     */
-    @Override
+
+  @Override
   protected void defaultCamera() {
     eyeDist = 1;
     resetMatrix();
@@ -172,10 +162,6 @@ public class PGraphics2D extends PGraphicsOpenGL {
 
   // MATRIX MORE!
 
-    /**
-     *
-     */
-
 
   @Override
   protected void begin2D() {
@@ -185,10 +171,8 @@ public class PGraphics2D extends PGraphicsOpenGL {
     defaultCamera();
   }
 
-    /**
-     *
-     */
-    @Override
+
+  @Override
   protected void end2D() {
     popMatrix();
     popProjection();
@@ -251,25 +235,13 @@ public class PGraphics2D extends PGraphicsOpenGL {
 
   // SHAPE I/O
 
-    /**
-     *
-     * @param extension
-     * @return
-     */
-
 
   static protected boolean isSupportedExtension(String extension) {
     return extension.equals("svg") || extension.equals("svgz");
   }
 
-    /**
-     *
-     * @param pg
-     * @param filename
-     * @param extension
-     * @return
-     */
-    static protected PShape loadShapeImpl(PGraphics pg,
+
+  static protected PShape loadShapeImpl(PGraphics pg,
                                         String filename, String extension) {
     if (extension.equals("svg") || extension.equals("svgz")) {
       PShapeSVG svg = new PShapeSVG(pg.parent.loadXML(filename));

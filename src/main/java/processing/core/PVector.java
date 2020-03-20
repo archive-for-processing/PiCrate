@@ -138,8 +138,6 @@ public class PVector implements Serializable {
 
   /**
    * Constructor for a 2D vector: z coordinate is set to 0.
-     * @param x
-     * @param y
    */
   public PVector(float x, float y) {
     this.x = x;
@@ -155,7 +153,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @param x the x component of the vector
    * @param y the y component of the vector
@@ -173,7 +170,6 @@ public class PVector implements Serializable {
   /**
    * @param x the x component of the vector
    * @param y the y component of the vector
-     * @return 
    */
   public PVector set(float x, float y) {
     this.x = x;
@@ -185,7 +181,6 @@ public class PVector implements Serializable {
 
   /**
    * @param v any variable of type PVector
-     * @return 
    */
   public PVector set(PVector v) {
     x = v.x;
@@ -198,7 +193,6 @@ public class PVector implements Serializable {
   /**
    * Set the x, y (and maybe z) coordinates using a float[] array as the source.
    * @param source array to copy from
-     * @return 
    */
   public PVector set(float[] source) {
     if (source.length >= 2) {
@@ -256,8 +250,6 @@ public class PVector implements Serializable {
    * Make a new 2D unit vector with a random direction. Pass in the parent
    * PApplet if you want randomSeed() to work (and be predictable). Or leave
    * it null and be... random.
-     * @param target
-     * @param parent
    * @return the random PVector
    */
   static public PVector random2D(PVector target, PApplet parent) {
@@ -308,8 +300,6 @@ public class PVector implements Serializable {
 
   /**
    * Make a new 3D unit vector with a random direction
-     * @param target
-     * @param parent
    * @return the random PVector
    */
   static public PVector random3D(PVector target, PApplet parent) {
@@ -355,7 +345,6 @@ public class PVector implements Serializable {
   /**
    * Make a new 2D unit vector from an angle
    *
-     * @param angle
    * @param target the target vector (if null, a new vector will be created)
    * @return the PVector
    */
@@ -376,7 +365,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @brief Get a copy of the vector
@@ -385,12 +373,8 @@ public class PVector implements Serializable {
     return new PVector(x, y, z);
   }
 
-    /**
-     *
-     * @return
-     * @deprecated
-     */
-    @Deprecated
+
+  @Deprecated
   public PVector get() {
     return copy();
   }
@@ -398,7 +382,6 @@ public class PVector implements Serializable {
 
   /**
    * @param target
-     * @return 
    */
   public float[] get(float[] target) {
     if (target == null) {
@@ -466,7 +449,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @param v the vector to be added
@@ -483,7 +465,6 @@ public class PVector implements Serializable {
   /**
    * @param x x component of the vector
    * @param y y component of the vector
-     * @return 
    */
   public PVector add(float x, float y) {
     this.x += x;
@@ -493,10 +474,7 @@ public class PVector implements Serializable {
 
 
   /**
-     * @param x
-     * @param y
    * @param z z component of the vector
-     * @return 
    */
   public PVector add(float x, float y, float z) {
     this.x += x;
@@ -510,7 +488,6 @@ public class PVector implements Serializable {
    * Add two vectors
    * @param v1 a vector
    * @param v2 another vector
-     * @return 
    */
   static public PVector add(PVector v1, PVector v2) {
     return add(v1, v2, null);
@@ -519,10 +496,7 @@ public class PVector implements Serializable {
 
   /**
    * Add two vectors into a target vector
-     * @param v1
    * @param target the target vector (if null, a new vector will be created)
-     * @param v2
-     * @return 
    */
   static public PVector add(PVector v1, PVector v2, PVector target) {
     if (target == null) {
@@ -545,7 +519,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @param v any variable of type PVector
@@ -562,7 +535,6 @@ public class PVector implements Serializable {
   /**
    * @param x the x component of the vector
    * @param y the y component of the vector
-     * @return 
    */
   public PVector sub(float x, float y) {
     this.x -= x;
@@ -572,10 +544,7 @@ public class PVector implements Serializable {
 
 
   /**
-     * @param x
-     * @param y
    * @param z the z component of the vector
-     * @return 
    */
   public PVector sub(float x, float y, float z) {
     this.x -= x;
@@ -589,7 +558,6 @@ public class PVector implements Serializable {
    * Subtract one vector from another
    * @param v1 the x, y, and z components of a PVector object
    * @param v2 the x, y, and z components of a PVector object
-     * @return 
    */
   static public PVector sub(PVector v1, PVector v2) {
     return sub(v1, v2, null);
@@ -598,10 +566,7 @@ public class PVector implements Serializable {
 
   /**
    * Subtract one vector from another and store in another vector
-     * @param v1
-     * @param v2
    * @param target PVector in which to store the result
-     * @return 
    */
   static public PVector sub(PVector v1, PVector v2, PVector target) {
     if (target == null) {
@@ -620,7 +585,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @brief Multiply a vector by a scalar
@@ -636,8 +600,6 @@ public class PVector implements Serializable {
 
   /**
    * @param v the vector to multiply by the scalar
-     * @param n
-     * @return 
    */
   static public PVector mult(PVector v, float n) {
     return mult(v, n, null);
@@ -646,10 +608,7 @@ public class PVector implements Serializable {
 
   /**
    * Multiply a vector by a scalar, and write the result into a target PVector.
-     * @param v
    * @param target PVector in which to store the result
-     * @param n
-     * @return 
    */
   static public PVector mult(PVector v, float n, PVector target) {
     if (target == null) {
@@ -668,7 +627,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @brief Divide a vector by a scalar
@@ -685,7 +643,6 @@ public class PVector implements Serializable {
   /**
    * Divide a vector by a scalar and return the result in a new vector.
    * @param v the vector to divide by the scalar
-     * @param n
    * @return a new vector that is v1 / n
    */
   static public PVector div(PVector v, float n) {
@@ -695,10 +652,7 @@ public class PVector implements Serializable {
 
   /**
    * Divide a vector by a scalar and store the result in another vector.
-     * @param v
    * @param target PVector in which to store the result
-     * @param n
-     * @return 
    */
   static public PVector div(PVector v, float n, PVector target) {
     if (target == null) {
@@ -718,7 +672,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @param v the x, y, and z coordinates of a PVector
@@ -767,7 +720,6 @@ public class PVector implements Serializable {
    * @param x x component of the vector
    * @param y y component of the vector
    * @param z z component of the vector
-     * @return 
    */
   public float dot(float x, float y, float z) {
     return this.x*x + this.y*y + this.z*z;
@@ -777,7 +729,6 @@ public class PVector implements Serializable {
   /**
    * @param v1 any variable of type PVector
    * @param v2 any variable of type PVector
-     * @return 
    */
   static public float dot(PVector v1, PVector v2) {
     return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
@@ -792,7 +743,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @param v the vector to calculate the cross product
    * @brief Calculate and return the cross product
@@ -805,7 +755,6 @@ public class PVector implements Serializable {
   /**
    * @param v any variable of type PVector
    * @param target PVector to store the result
-     * @return 
    */
   public PVector cross(PVector v, PVector target) {
     float crossX = y * v.z - v.y * z;
@@ -825,7 +774,6 @@ public class PVector implements Serializable {
    * @param v1 any variable of type PVector
    * @param v2 any variable of type PVector
    * @param target PVector to store the result
-     * @return 
    */
   static public PVector cross(PVector v1, PVector v2, PVector target) {
     float crossX = v1.y * v2.z - v2.y * v1.z;
@@ -848,7 +796,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @brief Normalize the vector to a length of 1
@@ -887,7 +834,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @param max the maximum magnitude for the vector
@@ -909,7 +855,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @param len the new length for this vector
@@ -952,12 +897,8 @@ public class PVector implements Serializable {
     return angle;
   }
 
-    /**
-     *
-     * @return
-     * @deprecated
-     */
-    @Deprecated
+
+  @Deprecated
   public float heading2D() {
     return heading();
   }
@@ -970,7 +911,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @brief Rotate the vector by an angle (2D only)
@@ -992,7 +932,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @brief Linear interpolate the vector to another vector
@@ -1012,8 +951,6 @@ public class PVector implements Serializable {
    * Linear interpolate between two vectors (returns a new PVector object)
    * @param v1 the vector to start from
    * @param v2 the vector to lerp to
-     * @param amt
-     * @return 
    */
   public static PVector lerp(PVector v1, PVector v2, float amt) {
     PVector v = v1.copy();
@@ -1027,8 +964,6 @@ public class PVector implements Serializable {
    * @param x the x component to lerp to
    * @param y the y component to lerp to
    * @param z the z component to lerp to
-     * @param amt
-     * @return 
    */
   public PVector lerp(float x, float y, float z, float amt) {
     this.x = PApplet.lerp(this.x, x, amt);
@@ -1045,7 +980,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage web_application
    * @param v1 the x, y, and z components of a PVector
@@ -1077,11 +1011,8 @@ public class PVector implements Serializable {
     return (float) Math.acos(amt);
   }
 
-    /**
-     *
-     * @return
-     */
-    @Override
+
+  @Override
   public String toString() {
     return "[ " + x + ", " + y + ", " + z + " ]";
   }
@@ -1096,7 +1027,6 @@ public class PVector implements Serializable {
    *
    * ( end auto-generated )
    *
-     * @return 
    * @webref pvector:method
    * @usage: web_application
    * @brief Return a representation of the vector as a float array
@@ -1111,12 +1041,8 @@ public class PVector implements Serializable {
     return array;
   }
 
-    /**
-     *
-     * @param obj
-     * @return
-     */
-    @Override
+
+  @Override
   public boolean equals(Object obj) {
     if (!(obj instanceof PVector)) {
       return false;
@@ -1125,11 +1051,8 @@ public class PVector implements Serializable {
     return x == p.x && y == p.y && z == p.z;
   }
 
-    /**
-     *
-     * @return
-     */
-    @Override
+
+  @Override
   public int hashCode() {
     int result = 1;
     result = 31 * result + Float.floatToIntBits(x);
