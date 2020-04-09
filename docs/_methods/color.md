@@ -11,7 +11,7 @@ color c2 = #FFCC00; // this gets pre-processed to `int c2 = 0xffFFCC00`
 ```
 This is yet another vanilla `processing` convention that you must learn to get around once you leave the processing ide.
 
-### propane  / JRubyArt ###
+### picrate  / JRubyArt ###
 
 in ruby we instead support use of quoted web-string (string is at least a valid type in ruby and java)
 
@@ -19,7 +19,7 @@ in ruby we instead support use of quoted web-string (string is at least a valid 
 c2 = color('#FFCC00') # we return a signed java int, note quoted string
 ```
 
-For propane we enable a convenience method color (based on processing PGraphics color), and for the most part this method behaves as the processing color method (but it is implemented differently under the hood to work with ruby Numeric/Fixnum). Basically the input can be an Array of Fixnum (approximating to a processing int) an Array of Float (approximating to processing float) or a special hexadecimal string or a hexadecimal number. See / try example sketch.
+For picrate we enable a convenience method color (based on processing PGraphics color), and for the most part this method behaves as the processing color method (but it is implemented differently under the hood to work with ruby Numeric/Fixnum). Basically the input can be an Array of Fixnum (approximating to a processing int) an Array of Float (approximating to processing float) or a special hexadecimal string or a hexadecimal number. See / try example sketch.
 
 ```ruby
 
@@ -93,7 +93,7 @@ end
 
 ### Making Necessity into a Virtue ###
 
-Many vanilla processing libraries (eg Hype, Wordcram and ColorHarmony) make use of the vanilla processing conventions to define `web` colors. But we have gone one better in JRubyArt and propane to use ruby to quickly create arrays of `web` color and even `dictionaries` of `web` colors. Now such lists would be useless unless we could convert the `web` colors to valid `color` int for use in processing as we have with the [web_to_color_array][web] method.
+Many vanilla processing libraries (eg Hype, Wordcram and ColorHarmony) make use of the vanilla processing conventions to define `web` colors. But we have gone one better in JRubyArt and picrate to use ruby to quickly create arrays of `web` color and even `dictionaries` of `web` colors. Now such lists would be useless unless we could convert the `web` colors to valid `color` int for use in processing as we have with the [web_to_color_array][web] method.
 
 ```ruby
 WEB = %w(#CC6600 #CC9900 #FFFFFF).freeze

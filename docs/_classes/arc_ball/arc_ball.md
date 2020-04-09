@@ -4,7 +4,7 @@ title:  "ArcBall"
 permalink: /classes/arcball/
 ---
 
-ArcBall is a user input interface to make a 3D object rotate in an intuitive way. It uses quaternions to represent orientations, although this implementation detail is hidden in propane. Use the ArcBall to enable mouse drag rotation and mouse wheel zoom in 3D sketches. Hold down x, y or z keys to constrain the rotation axis.
+ArcBall is a user input interface to make a 3D object rotate in an intuitive way. It uses quaternions to represent orientations, although this implementation detail is hidden in picrate. Use the ArcBall to enable mouse drag rotation and mouse wheel zoom in 3D sketches. Hold down x, y or z keys to constrain the rotation axis.
 
 See a simple example below, where the box (a cube in this case) gets centered in the middle of the display.
 

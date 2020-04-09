@@ -2,7 +2,7 @@ __C6H3N3O7__ [![Gem Version](https://badge.fury.io/rb/picrate.svg)](https://badg
 
 # PiCrate
 New version for `Buster` on raspberryPI 3B+ assumes self installed jdk11 or greater.
-Create processing sketches in ruby on raspberry-pi and linux (this project is a parallel development of [propane][propane] targetting the raspberry-pi, but will initially be developed on a regular linux box). The aim is to produce a gem installable app that can be run with jruby, with minimal dependencies. Drop the `C` and you get pirate, or and an `e` and get `PiCreate`, a happy coincidence?
+Create processing sketches in ruby on raspberry-pi and linux (this project is a parallel development of [picrate][picrate] targetting the raspberry-pi, but will initially be developed on a regular linux box). The aim is to produce a gem installable app that can be run with jruby, with minimal dependencies. Drop the `C` and you get pirate, or and an `e` and get `PiCreate`, a happy coincidence?
 
 
 ### To install from rubygems ###
@@ -57,4 +57,4 @@ jruby --dev my_sketch.rb # --dev flag speeds start-up
 ```
 
 [buster]:https://gist.github.com/monkstone/6ae9840d7b7008c177b4a9f589d14ec6
-[propane]:https://ruby-processing.github.io/propane/
+[picrate]:https://ruby-processing.github.io/picrate/

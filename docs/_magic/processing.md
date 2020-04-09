@@ -33,7 +33,7 @@ class MyClass{
 }
 ```
 
-See the generated java code below, __note__ all those `imports`, the `class wrapper`, and that `MyClass` becomes a java [inner class][inner]. Also __note__ that `size` has moved to settings (_the processing guys decided not make this change from processing-2.0 to processing-3.0 explicit, in propane and propane we do expect size to be in settings_).
+See the generated java code below, __note__ all those `imports`, the `class wrapper`, and that `MyClass` becomes a java [inner class][inner]. Also __note__ that `size` has moved to settings (_the processing guys decided not make this change from processing-2.0 to processing-3.0 explicit, in picrate and picrate we do expect size to be in settings_).
 
 ```java
 import processing.core.*;
@@ -87,7 +87,7 @@ class MyClass{
 ## java reflection gets used a lot in processing ##
 ------
 
-It is an unfortunate truth that [java reflection methods][reflection] are popular with both processing developers and some developers of supporting libraries. It is unfortunate because we have to go through hoops to use these methods in propane (and ruby-processing). The `captureEvent` and `videoEvent` are examples of reflection methods from the processing video developers. But we have made these readily available to propane users as a [simple library][library] load `load_library :video_event`. This is what you would do (if we had not created the `video_event` library):-
+It is an unfortunate truth that [java reflection methods][reflection] are popular with both processing developers and some developers of supporting libraries. It is unfortunate because we have to go through hoops to use these methods in picrate (and ruby-processing). The `captureEvent` and `videoEvent` are examples of reflection methods from the processing video developers. But we have made these readily available to picrate users as a [simple library][library] load `load_library :video_event`. This is what you would do (if we had not created the `video_event` library):-
 
 - create a java class `VideoInterface`
 - compile the java class (including classpath)
@@ -103,7 +103,7 @@ import processing.video.Movie;
 import processing.video.Capture;
 /**
  * This interface makes it easier/possible to use the reflection methods
- * from Movie and Capture classes in Processing::App in propane
+ * from Movie and Capture classes in Processing::App in picrate
  * @author Martin Prout
  */
 public interface VideoInterface {
@@ -131,7 +131,7 @@ javac -cp video.jar:core.jar monkstone/videoevent/VideoInterface.java
 jar -cvf video_event.jar monkstone
 ```
 
-See below a sketch which using this VideoEvent interface, see the version using the propane provided `:video_event` library [here][bw]
+See below a sketch which using this VideoEvent interface, see the version using the picrate provided `:video_event` library [here][bw]
 
 ### black_white_capture.rb ###
 
@@ -257,7 +257,7 @@ Another example of reflection usage the vanilla processing `selectInput` utility
 
 ### Native File Chooser ###
 
-What a native file chooser sketch looks like in java, the `selectInput` [callback][callback] relies on java reflection under the hood. We have to explicity provide such a signature to use this feature in propane hence [FileChooser][FileChooser] library.
+What a native file chooser sketch looks like in java, the `selectInput` [callback][callback] relies on java reflection under the hood. We have to explicity provide such a signature to use this feature in picrate hence [FileChooser][FileChooser] library.
 
 ```java
 public class chooser extends PApplet {

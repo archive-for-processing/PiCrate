@@ -52,7 +52,7 @@ public class Deglut {
 
   private final static int NINETY = 90;
   private final static int FULL = 360;
-  private static final long serialVersionUID = -1466528933765940101L;
+
 
   /**
   * Initialize sin table with values (first quadrant only)

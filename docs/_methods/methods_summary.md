@@ -74,7 +74,7 @@ Example Usages:
 
 ### Processing max and min convenience methods
 
-We make these methods available in propane, by mocking them using ruby `Enumerable` `max` and `min` methods, you may prefer to use the `Enumerable` methods directly since they are more flexible (you can even provide a [comparator block][enumerable] to change basis of ordering).
+We make these methods available in picrate, by mocking them using ruby `Enumerable` `max` and `min` methods, you may prefer to use the `Enumerable` methods directly since they are more flexible (you can even provide a [comparator block][enumerable] to change basis of ordering).
 
 
 ### find_method method

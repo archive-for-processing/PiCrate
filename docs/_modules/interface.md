@@ -29,7 +29,7 @@ public interface ContactListener {
 }
 ```
 
-And this is how we implement that interface in propane see [full example here][collision_listening], note empty methods are just fine.
+And this is how we implement that interface in picrate see [full example here][collision_listening], note empty methods are just fine.
 
 ```ruby
 # A custom listener allows us to get the physics engine to

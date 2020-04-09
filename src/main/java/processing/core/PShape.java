@@ -29,6 +29,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+
+import processing.awt.PImageAWT;
+
 import java.util.Base64;
 
 
@@ -46,7 +49,7 @@ import java.util.Base64;
  * and Adobe Illustrator. It is not a full SVG implementation, but offers
  * some straightforward support for handling vector data.
  *
- * ( end auto-generated )
+ * 
  * <h3>Advanced</h3>
  *
  * In-progress class to handle shape data, currently to be considered of
@@ -68,11 +71,11 @@ import java.util.Base64;
  * <p>For the time being, this class and its shape() and loadShape() friends in
  * PApplet exist as placeholders for more exciting things to come. If you'd
  * like to work with this class, make a subclass (see how PShapeSVG works)
- * and you can play with its internal methods all you like.
+ * and you can play with its internal methods all you like.</p>
  *
  * <p>Library developers are encouraged to create PShape objects when loading
  * shape data, so that they can eventually hook into the bounty that will be
- * the PShape interface, and the ease of loadShape() and shape().
+ * the PShape interface, and the ease of loadShape() and shape().</p>
  *
  * @webref shape
  * @usage Web &amp; Application
@@ -135,7 +138,7 @@ public class PShape implements PConstants {
    *
    * The width of the PShape document.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:field
    * @usage web_application
    * @brief     Shape document width
@@ -147,7 +150,7 @@ public class PShape implements PConstants {
    *
    * The height of the PShape document.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:field
    * @usage web_application
    * @brief     Shape document height
@@ -394,12 +397,12 @@ public class PShape implements PConstants {
    *
    * Returns a boolean value "true" if the image is set to be visible,
    * "false" if not. This is modified with the <b>setVisible()</b> parameter.
-   *  
+   * 
    * The visibility of a shape is usually controlled by whatever program
    * created the SVG file. For instance, this parameter is controlled by
    * showing or hiding the shape in the layers palette in Adobe Illustrator.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Returns a boolean value "true" if the image is set to be visible, "false" if not
@@ -415,12 +418,12 @@ public class PShape implements PConstants {
    *
    * Sets the shape to be visible or invisible. This is determined by the
    * value of the <b>visible</b> parameter.
-   *  
+   * 
    * The visibility of a shape is usually controlled by whatever program
    * created the SVG file. For instance, this parameter is controlled by
    * showing or hiding the shape in the layers palette in Adobe Illustrator.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:mathod
    * @usage web_application
    * @brief Sets the shape to be visible or invisible
@@ -439,7 +442,7 @@ public class PShape implements PConstants {
    * Styles include attributes such as colors, stroke weight, and stroke
    * joints.
    *
-   * ( end auto-generated )
+   * 
    *  <h3>Advanced</h3>
    * Overrides this shape's style information and uses PGraphics styles and
    * colors. Identical to ignoreStyles(true). Also disables styles for all
@@ -465,7 +468,7 @@ public class PShape implements PConstants {
    * Styles include attributes such as colors, stroke weight, and stroke
    * joints.
    *
-   * ( end auto-generated )
+   * 
    *
    * @webref pshape:method
    * @usage web_application
@@ -1445,18 +1448,25 @@ public class PShape implements PConstants {
   // TODO unapproved
   static protected PShape createShape(PApplet parent, PShape src) {
     PShape dest = null;
-    if (src.family == GROUP) {
-      dest = parent.createShape(GROUP);
-      PShape.copyGroup(parent, src, dest);
-    } else if (src.family == PRIMITIVE) {
-      dest = parent.createShape(src.kind, src.params);
-      PShape.copyPrimitive(src, dest);
-    } else if (src.family == GEOMETRY) {
-      dest = parent.createShape(src.kind);
-      PShape.copyGeometry(src, dest);
-    } else if (src.family == PATH) {
-      dest = parent.createShape(PATH);
-      PShape.copyPath(src, dest);
+    switch (src.family) {
+      case GROUP:
+        dest = parent.createShape(GROUP);
+        PShape.copyGroup(parent, src, dest);
+        break;
+      case PRIMITIVE:
+        dest = parent.createShape(src.kind, src.params);
+        PShape.copyPrimitive(src, dest);
+        break;
+      case GEOMETRY:
+        dest = parent.createShape(src.kind);
+        PShape.copyGeometry(src, dest);
+        break;
+      case PATH:
+        dest = parent.createShape(PATH);
+        PShape.copyPath(src, dest);
+        break;
+      default:
+        break;
     }
     dest.setName(src.name);
     return dest;
@@ -1604,16 +1614,23 @@ public class PShape implements PConstants {
    * Draws the SVG document.
    */
   protected void drawImpl(PGraphics g) {
-    if (family == GROUP) {
-      drawGroup(g);
-    } else if (family == PRIMITIVE) {
-      drawPrimitive(g);
-    } else if (family == GEOMETRY) {
-      // Not same as path: `kind` matters.
+    switch (family) {
+      case GROUP:
+        drawGroup(g);
+        break;
+      case PRIMITIVE:
+        drawPrimitive(g);
+        break;
+      case GEOMETRY:
+        // Not same as path: `kind` matters.
 //      drawPath(g);
-      drawGeometry(g);
-    } else if (family == PATH) {
-      drawPath(g);
+        drawGeometry(g);
+        break;
+      case PATH:
+        drawPath(g);
+        break;
+      default:
+        break;
     }
   }
 
@@ -1626,88 +1643,97 @@ public class PShape implements PConstants {
 
 
   protected void drawPrimitive(PGraphics g) {
-    if (kind == POINT) {
-      g.point(params[0], params[1]);
-
-    } else if (kind == LINE) {
-      if (params.length == 4) {  // 2D
-        g.line(params[0], params[1],
-               params[2], params[3]);
-      } else {  // 3D
-        g.line(params[0], params[1], params[2],
-               params[3], params[4], params[5]);
-      }
-
-    } else if (kind == TRIANGLE) {
-      g.triangle(params[0], params[1],
-                 params[2], params[3],
-                 params[4], params[5]);
-
-    } else if (kind == QUAD) {
-      g.quad(params[0], params[1],
-             params[2], params[3],
-             params[4], params[5],
-             params[6], params[7]);
-
-    } else if (kind == RECT) {
-
-      if (imagePath != null){
+    switch (kind) {
+      case POINT:
+        g.point(params[0], params[1]);
+        break;
+      case LINE:
+        if (params.length == 4) {  // 2D
+          g.line(params[0], params[1],
+            params[2], params[3]);
+        } else {  // 3D
+          g.line(params[0], params[1], params[2],
+            params[3], params[4], params[5]);
+        } break;
+      case TRIANGLE:
+        g.triangle(params[0], params[1],
+          params[2], params[3],
+          params[4], params[5]);
+        break;
+      case QUAD:
+        g.quad(params[0], params[1],
+          params[2], params[3],
+          params[4], params[5],
+          params[6], params[7]);
+        break;
+      case RECT:
+        if (imagePath != null){
           loadImage(g);
+        } if (image != null) {
+          int oldMode = g.imageMode;
+          g.imageMode(CORNER);
+          g.image(image, params[0], params[1], params[2], params[3]);
+          g.imageMode(oldMode);
+        } else {
+          int oldMode = g.rectMode;
+          g.rectMode(rectMode);
+      switch (params.length) {
+        case 4:
+          g.rect(params[0], params[1],
+            params[2], params[3]);
+          break;
+        case 5:
+          g.rect(params[0], params[1],
+            params[2], params[3],
+            params[4]);
+          break;
+        case 8:
+          g.rect(params[0], params[1],
+            params[2], params[3],
+            params[4], params[5],
+            params[6], params[7]);
+          break;
+        default:
+          break;
       }
-      if (image != null) {
-        int oldMode = g.imageMode;
-        g.imageMode(CORNER);
-        g.image(image, params[0], params[1], params[2], params[3]);
-        g.imageMode(oldMode);
-      } else {
-        int oldMode = g.rectMode;
-        g.rectMode(rectMode);
-        if (params.length == 4) {
-          g.rect(params[0], params[1],
-                 params[2], params[3]);
-        } else if (params.length == 5) {
-          g.rect(params[0], params[1],
-                 params[2], params[3],
-                 params[4]);
-        } else if (params.length == 8) {
-          g.rect(params[0], params[1],
-                 params[2], params[3],
-                 params[4], params[5],
-                 params[6], params[7]);
+          g.rectMode(oldMode);
+        } break;
+      case ELLIPSE:
+        {
+          int oldMode = g.ellipseMode;
+          g.ellipseMode(ellipseMode);
+          g.ellipse(params[0], params[1],
+            params[2], params[3]);
+          g.ellipseMode(oldMode);
+          break;
         }
-        g.rectMode(oldMode);
-      }
-    } else if (kind == ELLIPSE) {
-      int oldMode = g.ellipseMode;
-      g.ellipseMode(ellipseMode);
-      g.ellipse(params[0], params[1],
-                params[2], params[3]);
-      g.ellipseMode(oldMode);
-
-    } else if (kind == ARC) {
-      int oldMode = g.ellipseMode;
-      g.ellipseMode(ellipseMode);
-      if (params.length == 6) {
-        g.arc(params[0], params[1],
+      case ARC:
+        {
+          int oldMode = g.ellipseMode;
+          g.ellipseMode(ellipseMode);
+          if (params.length == 6) {
+            g.arc(params[0], params[1],
               params[2], params[3],
               params[4], params[5]);
-      } else if (params.length == 7) {
-        g.arc(params[0], params[1],
+          } else if (params.length == 7) {
+            g.arc(params[0], params[1],
               params[2], params[3],
               params[4], params[5],
               (int) params[6]);
-      }
-      g.ellipseMode(oldMode);
-
-    } else if (kind == BOX) {
-      if (params.length == 1) {
-        g.box(params[0]);
-      } else {
-        g.box(params[0], params[1], params[2]);
-      }
-
-    } else if (kind == SPHERE) {
-      g.sphere(params[0]);
+          }   g.ellipseMode(oldMode);
+          break;
+        }
+      case BOX:
+        if (params.length == 1) {
+          g.box(params[0]);
+        } else {
+          g.box(params[0], params[1], params[2]);
+        } break;
+      case SPHERE:
+        g.sphere(params[0]);
+        break;
+      default:
+        break;
     }
   }
 
@@ -1950,7 +1976,7 @@ public class PShape implements PConstants {
     boolean requiresCheckAlpha = extension.equals("gif") || extension.equals("png") ||
         extension.equals("unknown");
 
-    PImage loadedImage = new PImage(awtImage);
+    PImage loadedImage = new PImageAWT(awtImage);
 
     if (requiresCheckAlpha) {
         loadedImage.checkAlpha();
@@ -2000,7 +2026,7 @@ public class PShape implements PConstants {
    * shape with the <b>target</b> parameter. The shape is returned as a
    * <b>PShape</b> object, or <b>null</b> is returned if there is an error.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Returns a child element of a shape as a PShape object
@@ -2479,7 +2505,7 @@ public class PShape implements PConstants {
    * created, only the <b>setFill()</b> method can define a new fill value for
    * the <b>PShape</b>.
    *
-   * ( end auto-generated )
+   * 
    *
    * @webref
    * @param fill
@@ -2524,7 +2550,7 @@ public class PShape implements PConstants {
       vertices[index][PGraphics.A] = ((fill >> 24) & 0xFF) / 255.0f;
       vertices[index][PGraphics.R] = ((fill >> 16) & 0xFF) / 255.0f;
       vertices[index][PGraphics.G] = ((fill >>  8) & 0xFF) / 255.0f;
-      vertices[index][PGraphics.B] = ((fill >>  0) & 0xFF) / 255.0f;
+      vertices[index][PGraphics.B] = ((fill) & 0xFF) / 255.0f;
     }
   }
 
@@ -2635,7 +2661,7 @@ public class PShape implements PConstants {
    * However, after the shape is created, only the <b>setStroke()</b> method
    * can define a new stroke value for the <b>PShape</b>.
    *
-   * ( end auto-generated )
+   * 
    *
    * @webref
    * @param stroke
@@ -2679,7 +2705,7 @@ public class PShape implements PConstants {
     vertices[index][PGraphics.SA] = ((stroke >> 24) & 0xFF) / 255.0f;
     vertices[index][PGraphics.SR] = ((stroke >> 16) & 0xFF) / 255.0f;
     vertices[index][PGraphics.SG] = ((stroke >>  8) & 0xFF) / 255.0f;
-    vertices[index][PGraphics.SB] = ((stroke >>  0) & 0xFF) / 255.0f;
+    vertices[index][PGraphics.SB] = ((stroke) & 0xFF) / 255.0f;
   }
 
 
@@ -2843,7 +2869,7 @@ public class PShape implements PConstants {
 
     vertices[index][PGraphics.SPR] = ((specular >> 16) & 0xFF) / 255.0f;
     vertices[index][PGraphics.SPG] = ((specular >>  8) & 0xFF) / 255.0f;
-    vertices[index][PGraphics.SPB] = ((specular >>  0) & 0xFF) / 255.0f;
+    vertices[index][PGraphics.SPB] = ((specular) & 0xFF) / 255.0f;
   }
 
 
@@ -2892,7 +2918,7 @@ public class PShape implements PConstants {
 
     vertices[index][PGraphics.ER] = ((emissive >> 16) & 0xFF) / 255.0f;
     vertices[index][PGraphics.EG] = ((emissive >>  8) & 0xFF) / 255.0f;
-    vertices[index][PGraphics.EB] = ((emissive >>  0) & 0xFF) / 255.0f;
+    vertices[index][PGraphics.EB] = ((emissive) & 0xFF) / 255.0f;
   }
 
 
@@ -2979,40 +3005,43 @@ public class PShape implements PConstants {
    * with PATH shapes or GROUP shapes that contain other GROUPs or PATHs.
    */
   public boolean contains(float x, float y) {
-    if (family == PATH) {
-      // apply the inverse transformation matrix to the point coordinates
-      PMatrix inverseCoords = matrix.get();
-      inverseCoords.invert();  // maybe cache this?
-      inverseCoords.invert();  // maybe cache this?
-      PVector p = new PVector();
-      inverseCoords.mult(new PVector(x,y),p);
-
-      // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-      boolean c = false;
-      for (int i = 0, j = vertexCount-1; i < vertexCount; j = i++) {
-        if (((vertices[i][Y] > p.y) != (vertices[j][Y] > p.y)) &&
-            (p.x <
-                (vertices[j][X]-vertices[i][X]) *
-                (y-vertices[i][Y]) /
-                (vertices[j][1]-vertices[i][Y]) +
-                vertices[i][X])) {
-          c = !c;
+    switch (family) {
+      case PATH:
+        PVector p = new PVector(x, y);
+        if (matrix != null) {
+          // apply the inverse transformation matrix to the point coordinates
+          PMatrix inverseCoords = matrix.get();
+          // TODO why is this called twice? [fry 190724]
+          // commit was https://github.com/processing/processing/commit/027fc7a4f8e8d0a435366eae754304eea282512a
+          inverseCoords.invert();  // maybe cache this?
+          inverseCoords.invert();  // maybe cache this?
+          inverseCoords.mult(new PVector(x, y), p);
         }
-      }
-      return c;
-
-    } else if (family == GROUP) {
-      // If this is a group, loop through children until we find one that
-      // contains the supplied coordinates. If a child does not support
-      // contains() throw a warning and continue.
-      for (int i = 0; i < childCount; i++) {
-        if (children[i].contains(x, y)) return true;
-      }
-      return false;
-
-    } else {
-      // https://github.com/processing/processing/issues/1280
-      throw new IllegalArgumentException("The contains() method is only implemented for paths.");
+        
+        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+        boolean c = false;
+        for (int i = 0, j = vertexCount-1; i < vertexCount; j = i++) {
+          if (((vertices[i][Y] > p.y) != (vertices[j][Y] > p.y)) &&
+            (p.x <
+            (vertices[j][X]-vertices[i][X]) *
+            (y-vertices[i][Y]) /
+            (vertices[j][1]-vertices[i][Y]) +
+            vertices[i][X])) {
+            c = !c;
+          }
+        }
+        return c;
+      case GROUP:
+        // If this is a group, loop through children until we find one that
+        // contains the supplied coordinates. If a child does not support
+        // contains() throw a warning and continue.
+        for (int i = 0; i < childCount; i++) {
+          if (children[i].contains(x, y)) return true;
+        }
+        return false;
+      default:
+        // https://github.com/processing/processing/issues/1280
+        throw new IllegalArgumentException("The contains() method is only implemented for paths.");
     }
   }
 
@@ -3041,7 +3070,7 @@ public class PShape implements PConstants {
    * Using this method with the <b>z</b> parameter requires using the P3D
    * parameter in combination with size.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Displaces the shape
@@ -3081,7 +3110,7 @@ public class PShape implements PConstants {
    * This method requires a 3D renderer. You need to use P3D as a third
    * parameter for the <b>size()</b> function as shown in the example above.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Rotates the shape around the x-axis
@@ -3114,7 +3143,7 @@ public class PShape implements PConstants {
    * This method requires a 3D renderer. You need to use P3D as a third
    * parameter for the <b>size()</b> function as shown in the example above.
    *
-   * ( end auto-generated )
+   * 
    *
    * @webref pshape:method
    * @usage web_application
@@ -3149,7 +3178,7 @@ public class PShape implements PConstants {
    * This method requires a 3D renderer. You need to use P3D as a third
    * parameter for the <b>size()</b> function as shown in the example above.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Rotates the shape around the z-axis
@@ -3180,7 +3209,7 @@ public class PShape implements PConstants {
    * <b>rotate(PI)</b>. This transformation is applied directly to the shape,
    * it's not refreshed each time <b>draw()</b> is run.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Rotates the shape
@@ -3231,7 +3260,7 @@ public class PShape implements PConstants {
    * Using this method with the <b>z</b> parameter requires using the P3D
    * parameter in combination with size.
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @usage web_application
    * @brief Increases and decreases the size of a shape
@@ -3270,7 +3299,7 @@ public class PShape implements PConstants {
    * Replaces the current matrix of a shape with the identity matrix. The
    * equivalent function in OpenGL is glLoadIdentity().
    *
-   * ( end auto-generated )
+   * 
    * @webref pshape:method
    * @brief Replaces the current matrix of a shape with the identity matrix
    * @usage web_application

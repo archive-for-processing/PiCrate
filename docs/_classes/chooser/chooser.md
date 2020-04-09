@@ -4,7 +4,7 @@ title:  "File Chooser"
 permalink:   /classes/chooser/
 ---
 
-A native file chooser for propane, bases around vanilla processing `selectInput`.
+A native file chooser for picrate, bases around vanilla processing `selectInput`.
 
 ### Usage ###
 
@@ -12,7 +12,7 @@ First load the `chooser` library, this creates the interface:-
 
 `public void file_selected(java.io.File selected);`
 
-which you need to define in your sketch, to make use the `selected` file. This sketch makes use of the propane method `resizable` (vanilla processing `surface.setResizable(true)`) so that we can change sketch size to match our `image`. Note we need to guard against `img` being `nil` or sketch will crash. You may change the the prompt `select an image` in `select_input` but you cannot change `file_selected` which is hard-wired to cope with java reflection.
+which you need to define in your sketch, to make use the `selected` file. This sketch makes use of the picrate method `resizable` (vanilla processing `surface.setResizable(true)`) so that we can change sketch size to match our `image`. Note we need to guard against `img` being `nil` or sketch will crash. You may change the the prompt `select an image` in `select_input` but you cannot change `file_selected` which is hard-wired to cope with java reflection.
 
 ### example sketch ###
 ```ruby

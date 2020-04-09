@@ -22,6 +22,9 @@
 
 package processing.core;
 
+import java.io.File;
+
+import processing.awt.ShimAWT;
 
 /**
  * Surface that's not really visible. Used for PDF and friends, or as a base
@@ -33,15 +36,48 @@ public class PSurfaceNone implements PSurface {
 
   protected Thread thread;
   protected boolean paused;
-  protected final Object pauseObject;
+  protected Object pauseObject = new Object();
 
   protected float frameRateTarget = 60;
   protected long frameRatePeriod = 1000000000L / 60L;
 
 
   public PSurfaceNone(PGraphics graphics) {
-    this.pauseObject = new Object();
     this.graphics = graphics;
+  }
+
+
+  public int displayDensity() {
+    return 1;
+  }
+
+
+  public int displayDensity(int display) {
+    return 1;
+  }
+
+
+  @Override
+  public PImage loadImage(String path, Object... args) {
+    return ShimAWT.loadImage(sketch, path, args);
+  }
+
+
+  @Override
+  public void selectInput(String prompt, String callback, File file,
+                          Object callbackObject) {
+  }
+
+
+  @Override
+  public void selectOutput(String prompt, String callback, File file,
+                           Object callbackObject) {
+  }
+
+
+  @Override
+  public void selectFolder(String prompt, String callback, File file,
+                           Object callbackObject) {
   }
 
 
@@ -184,6 +220,15 @@ public class PSurfaceNone implements PSurface {
   //
 
 
+  @Override
+  public boolean openLink(String url) {
+    return false;
+  }
+
+
+  //
+
+
   public Thread createThread() {
     return new AnimationThread();
   }
@@ -250,7 +295,6 @@ public class PSurfaceNone implements PSurface {
   }
 
 
-  @Override
   public void setFrameRate(float fps) {
     frameRateTarget = fps;
     frameRatePeriod = (long) (1000000000.0 / frameRateTarget);
@@ -271,7 +315,7 @@ public class PSurfaceNone implements PSurface {
 
     /**
      * Main method for the primary animation thread.
-     * <A HREF="http://java.sun.com/products/jfc/tsc/articles/painting/">Painting in AWT and Swing</A>
+     * <a href="http://java.sun.com/products/jfc/tsc/articles/painting/">Painting in AWT and Swing</a>
      */
     @Override
     public void run() {  // not good to make this synchronized, locks things up

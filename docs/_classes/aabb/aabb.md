@@ -4,7 +4,7 @@ title:  "AaBb"
 permalink:   /classes/aabb/
 ---
 
-AaBb is a 2D axis aligned bounding box for propane
+AaBb is a 2D axis aligned bounding box for picrate
 
 Constructors:-
 ```ruby

@@ -13,7 +13,7 @@ class MyClass
 end
 ```
 
-Now we know this is not `kosher` and as you get more comfortable with propane you may eschew this egregious hack, but initially at least you will find it highly convenient. There are plenty of examples included with the samples (because it so damn convenient). See [frame_of_reference][sketch] sketch and [Plane][Plane] and [Cylinder][Cylinder] classes
+Now we know this is not `kosher` and as you get more comfortable with picrate you may eschew this egregious hack, but initially at least you will find it highly convenient. There are plenty of examples included with the samples (because it so damn convenient). See [frame_of_reference][sketch] sketch and [Plane][Plane] and [Cylinder][Cylinder] classes
 
 
 [sketch]:https://github.com/ruby-processing/picrate-examples/blob/master/library/vecmath/vec3d/frame_of_reference.rb

@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Propane::HelperMethods"
-keywords: Propane, module
+title:  "Picrate::HelperMethods"
+keywords: Picrate, module
 permalink: modules/helper_methods.html
 ---
 The [HelperMethods][HelperMethods] module provides additional methods to the PiCrate sketch.

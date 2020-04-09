@@ -14,10 +14,10 @@ th{
     border:2px solid #0000FF;
 }
 </style>
-You can use most [processing methods][processing] in propane, but where possible you should prefer these ruby alternatives (you should also prefer Vec2D and Vec3D to PVector).
+You can use most [processing methods][processing] in picrate, but where possible you should prefer these ruby alternatives (you should also prefer Vec2D and Vec3D to PVector).
 Here is a list of ruby alternatives to some 'processing' convenience methods; which with the exception of `color`, `map1d`, `p5map`, `degrees` and `radians` are just regular ruby methods.
 
-|function       |processing            |propane           |
+|function       |processing            |picrate           |
 |----------     |-------------       |------               |
 |camera         |`camera(args)`      |`kamera(hash_args)`  |
 |color string   |`color(#cc6600)`      |`color('#cc6600')` |
@@ -54,7 +54,7 @@ Here is a list of ruby alternatives to some 'processing' convenience methods; wh
 
 For examples of using time in sketches see [learning JRubyArt blog][time], [timestamp][timestamp] and this [clock sketch][clock].
 
-For example of `kamera` usage see [kamera][kamera]. To use `selectInput` see link to `File Chooser` in page header. We actually use the ruby Enumerable methods `max` and `min` methods to make `max(*array)` and `min(*methods)` available in propane, so you could use the processing form providing you splat the array, but it is simpler to use the ruby method directly further you have the option with ruby of changing the [comparator via a block][comparator].
+For example of `kamera` usage see [kamera][kamera]. To use `selectInput` see link to `File Chooser` in page header. We actually use the ruby Enumerable methods `max` and `min` methods to make `max(*array)` and `min(*methods)` available in picrate, so you could use the processing form providing you splat the array, but it is simpler to use the ruby method directly further you have the option with ruby of changing the [comparator via a block][comparator].
 
 NB: if you have any trouble with `save` or `save_frame` then use the option of providing an absolute path.  You can easily do this using the `data_path` wrapper that does it for you see [data_path method][data_path].
 

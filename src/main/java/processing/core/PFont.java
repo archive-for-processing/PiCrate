@@ -24,12 +24,24 @@
 
 package processing.core;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Toolkit;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.PathIterator;
-import java.awt.image.*;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -186,7 +198,7 @@ public class PFont implements PConstants {
    * <b>createFont()</b> function for dynamically converting fonts into a
    * format to use with Processing.
    *
-   * ( end auto-generated )
+   * 
    *
    * @nowebref
    * @param font font the font object to create from
@@ -204,7 +216,7 @@ public class PFont implements PConstants {
    * @nowebref
    * @param charset array of all unicode chars that should be included
    */
-  public PFont(Font font, boolean smooth, char charset[]) {
+  public PFont(Font font, boolean smooth, char[] charset) {
     // save this so that we can use the native version
     this.font = font;
     this.smooth = smooth;
@@ -329,7 +341,7 @@ public class PFont implements PConstants {
    *
    * @nowebref
    */
-  public PFont(Font font, boolean smooth, char charset[],
+  public PFont(Font font, boolean smooth, char[] charset,
                boolean stream, int density) {
     this(font, smooth, charset);
     this.stream = stream;
@@ -337,6 +349,7 @@ public class PFont implements PConstants {
   }
 
   /**
+   * @throws java.io.IOException
    * @nowebref
    * @param input InputStream
    */
@@ -865,7 +878,7 @@ public class PFont implements PConstants {
     for (int i = 0; i < EXTRA_CHARS.length; i++) {
       CHARSET[index++] = EXTRA_CHARS[i];
     }
-  };
+  }
 
 
   /**
@@ -877,7 +890,7 @@ public class PFont implements PConstants {
    * fonts. This function is meant as a tool for programming local
    * applications and is not recommended for use in applets.
    *
-   * ( end auto-generated )
+   * 
    *
    * @webref pfont
    * @usage application
@@ -885,7 +898,7 @@ public class PFont implements PConstants {
    */
   static public String[] list() {
     loadFonts();
-    String list[] = new String[fonts.length];
+    String[] list = new String[fonts.length];
     for (int i = 0; i < list.length; i++) {
       list[i] = fonts[i].getName();
     }
@@ -914,7 +927,7 @@ public class PFont implements PConstants {
         GraphicsEnvironment.getLocalGraphicsEnvironment();
       fonts = ge.getAllFonts();
 
-      if (PApplet.platform == PConstants.MACOSX) {
+      if (PApplet.platform == PConstants.MACOS) {
         fontDifferent = new HashMap<>();
         for (Font font : fonts) {
           // No need to use getPSName() anymore because getName()
@@ -936,7 +949,7 @@ public class PFont implements PConstants {
    * See: <a href="https://github.com/processing/processing/issues/5481">issue #5481</a>
    */
   static public Font findFont(String name) {
-    if (PApplet.platform == PConstants.MACOSX) {
+    if (PApplet.platform == PConstants.MACOS) {
       loadFonts();
       Font maybe = fontDifferent.get(name);
       if (maybe != null) {
